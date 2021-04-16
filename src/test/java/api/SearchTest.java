@@ -15,19 +15,19 @@ public class SearchTest {
 
     @DataProvider(name = "searchValue")
     public static Object[][] value() {
-        return new Object[][]{{"dog", 200}, {"Airways Brewing", 200}, {null, 200}};
+        return new Object[][]{{"dog", 200}, {"Airways Brewing", 200}, {null, 200}, {"", 200}};
     }
 
 
     @Test(dataProvider = "searchValue")
-    public void checkSearchStatusCode(String searchTerms, Integer statusCode) {
+    public void checkStatusCodeWithDifferentSearchParams(String searchTerms, Integer statusCode) {
          breweriesService.searchByTerm(searchTerms).assertThat().statusCode(statusCode);
 
     }
 
 
     @Test()
-    public void checkSearchPepPageResult() {
+    public void checkQuantitySearchItemsInResp() {
         List<SearchResponse> searchResponses = breweriesService.searchByTerm("dog", 200, 1);
         assertThat(searchResponses.size()).isEqualTo(1);
     }
