@@ -2,6 +2,7 @@ package apiServices;
 
 import apiModels.SearchResponse;
 import io.restassured.RestAssured;
+import io.restassured.response.ValidatableResponse;
 
 import java.util.Arrays;
 import java.util.List;
@@ -10,17 +11,17 @@ import java.util.List;
 public class BreweriesService extends BaseApi {
 
 
-    public void searchByTerm(String searchTerm, Integer statusCode) {
-        RestAssured
+    public ValidatableResponse searchByTerm(String searchTerm) {
+       ValidatableResponse response =  RestAssured
                 .given(baseRequest())
                 .when()
                 .param("query", searchTerm)
                 .get("search")
-                .then()
-                .statusCode(statusCode);
+                .then();
+       return response;
     }
 
-    public Integer searchByTerm(String searchTerm, Integer statusCode, Integer per_page_value) {
+    public List<SearchResponse> searchByTerm(String searchTerm, Integer statusCode, Integer per_page_value) {
         List<SearchResponse> response = Arrays.asList(RestAssured
                 .given(baseRequest())
                 .when()
@@ -31,7 +32,7 @@ public class BreweriesService extends BaseApi {
                 .then()
                 .statusCode(statusCode)
                 .extract().response().getBody().as(SearchResponse[].class));
-        return response.size();
+        return response;
     }
 
 

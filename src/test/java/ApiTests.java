@@ -1,6 +1,11 @@
+import apiModels.SearchResponse;
 import apiServices.BreweriesService;
+import io.restassured.response.Response;
+import io.restassured.response.ValidatableResponse;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+
+import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
@@ -16,14 +21,15 @@ public class ApiTests {
 
     @Test(dataProvider = "searchValue")
     public void checkSearchStatusCode(String searchTerms, Integer statusCode) {
-        breweriesService.searchByTerm(searchTerms, statusCode);
+         breweriesService.searchByTerm(searchTerms).assertThat().statusCode(statusCode);
+
     }
 
 
     @Test()
     public void checkSearchPepPageResult() {
-        int breweriesQuantity = breweriesService.searchByTerm("dog", 200, 1);
-        assertThat(breweriesQuantity).isEqualTo(1);
+        List<SearchResponse> searchResponses = breweriesService.searchByTerm("dog", 200, 1);
+        assertThat(searchResponses.size()).isEqualTo(1);
     }
 
 }
