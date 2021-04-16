@@ -1,12 +1,15 @@
 package apiModels;
 
-import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
-@Data
-public class SearchResponse{
+import java.util.List;
 
-	@JsonProperty("SearchResponse")
-	private List<SearchResponseItem> searchResponse;
+@Data
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class SearchResponse {
+
+    @JsonProperty("SearchResponse")
+    public List<SearchResponseItem> searchResponse;
 }

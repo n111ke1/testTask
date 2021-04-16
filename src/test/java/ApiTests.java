@@ -1,5 +1,4 @@
 import apiServices.BreweriesService;
-import org.assertj.core.api.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -11,23 +10,20 @@ public class ApiTests {
 
     @DataProvider(name = "searchValue")
     public static Object[][] value() {
-        return new Object[][] {{"dog", 200}, {"Airways Brewing", 200}, {null, 200}};
+        return new Object[][]{{"dog", 200}, {"Airways Brewing", 200}, {null, 200}};
     }
 
 
     @Test(dataProvider = "searchValue")
-    public void checkSearchStatusCode(String searchTerms, Integer statusCode){
-        breweriesService.getSearch(searchTerms, statusCode);
+    public void checkSearchStatusCode(String searchTerms, Integer statusCode) {
+        breweriesService.searchByTerm(searchTerms, statusCode);
     }
 
 
     @Test()
-    public void checkSearchPepPage(){
-       int breweriesQuantity =  breweriesService.getSearchPerPage("dog", 200, 1);
+    public void checkSearchPepPageResult() {
+        int breweriesQuantity = breweriesService.searchByTerm("dog", 200, 1);
         assertThat(breweriesQuantity).isEqualTo(1);
-
     }
-
-
 
 }

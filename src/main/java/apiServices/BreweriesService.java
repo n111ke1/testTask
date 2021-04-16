@@ -1,29 +1,27 @@
 package apiServices;
 
 import apiModels.SearchResponse;
-import apiModels.SearchResponseItem;
 import io.restassured.RestAssured;
 
+import java.util.Arrays;
 import java.util.List;
 
 
 public class BreweriesService extends BaseApi {
 
 
-    public void getSearch(String searchTerm, Integer statusCode){
+    public void searchByTerm(String searchTerm, Integer statusCode) {
         RestAssured
                 .given(baseRequest())
                 .when()
                 .param("query", searchTerm)
-                .log().all()
                 .get("search")
                 .then()
-                .log().all()
                 .statusCode(statusCode);
     }
 
-    public Integer getSearchPerPage(String searchTerm, Integer statusCode, Integer per_page_value){
-           List<SearchResponseItem> searchResponse =  RestAssured
+    public Integer searchByTerm(String searchTerm, Integer statusCode, Integer per_page_value) {
+        List<SearchResponse> response = Arrays.asList(RestAssured
                 .given(baseRequest())
                 .when()
                 .param("query", searchTerm)
@@ -31,12 +29,10 @@ public class BreweriesService extends BaseApi {
                 .log().all()
                 .get("search")
                 .then()
-                .log().all()
                 .statusCode(statusCode)
-                   .extract().body().as(SearchResponse.class).getSearchResponse();
-           return searchResponse.size();
+                .extract().response().getBody().as(SearchResponse[].class));
+        return response.size();
     }
-
 
 
 }

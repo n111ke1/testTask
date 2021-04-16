@@ -1,40 +1,44 @@
 package apiModels;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class SearchResponseItem{
 
 	@JsonProperty("country")
 	private String country;
 
 	@JsonProperty("brewery_type")
-	private String breweryType;
+	private String brewery_Type;
 
 	@JsonProperty("city")
 	private String city;
 
 	@JsonProperty("address_2")
-	private Object address2;
+	private String address_2;
 
 	@JsonProperty("latitude")
-	private Object latitude;
+	private String latitude;
 
 	@JsonProperty("address_3")
-	private Object address3;
+	private String address_3;
 
 	@JsonProperty("created_at")
-	private String createdAt;
+	private String created_At;
 
 	@JsonProperty("obdb_id")
-	private String obdbId;
+	private String obdb_id;
 
 	@JsonProperty("website_url")
-	private String websiteUrl;
+	private String website_url;
 
 	@JsonProperty("updated_at")
-	private String updatedAt;
+	private String updated_at;
 
 	@JsonProperty("phone")
 	private String phone;
@@ -46,7 +50,7 @@ public class SearchResponseItem{
 	private String name;
 
 	@JsonProperty("county_province")
-	private Object countyProvince;
+	private String county_province;
 
 	@JsonProperty("id")
 	private int id;
@@ -55,8 +59,8 @@ public class SearchResponseItem{
 	private String state;
 
 	@JsonProperty("postal_code")
-	private String postalCode;
+	private String postal_code;
 
 	@JsonProperty("longitude")
-	private Object longitude;
+	private String longitude;
 }

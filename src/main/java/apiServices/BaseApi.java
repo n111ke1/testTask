@@ -8,7 +8,7 @@ import io.restassured.specification.RequestSpecification;
 
 abstract class BaseApi {
 
-    public RequestSpecification baseRequest(){
+    public RequestSpecification baseRequest() {
         RestAssured.baseURI = "https://api.openbrewerydb.org/";
         RestAssured.basePath = "breweries";
         RequestSpecification requestSpec = new RequestSpecBuilder()
@@ -17,7 +17,6 @@ abstract class BaseApi {
                 .build();
         return requestSpec;
     }
-
 
 
 }
