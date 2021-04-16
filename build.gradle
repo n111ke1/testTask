@@ -1,0 +1,56 @@
+plugins {
+    id "java"
+    id "idea"
+}
+
+group 'testTask'
+version '1.0-SNAPSHOT'
+
+version = '1.0'
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+
+repositories {
+    mavenCentral()
+    jcenter()
+    maven { url 'https://jitpack.io' }
+
+}
+
+tasks.withType(Test) {
+    systemProperties System.properties
+}
+
+
+dependencies {
+
+
+    compile group: 'org.testng', name: 'testng', version: '7.3.0'
+    compile 'io.rest-assured:rest-assured:4.3.3'
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.12.2'
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.12.2'
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version: '2.12.2'
+
+
+    testCompile group: 'org.assertj', name: 'assertj-core', version: '3.16.1'
+    implementation 'org.assertj:assertj-core:3.16.1'
+    compileOnly 'org.projectlombok:lombok:1.18.12'
+    annotationProcessor 'org.projectlombok:lombok:1.18.12'
+    testCompileOnly 'org.projectlombok:lombok:1.18.12'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.12'
+
+}
+
+
+tasks.test {
+    useTestNG {
+        preserveOrder = true
+    }
+
+    clean {
+        delete 'allure-results','build/allure-results'}
+
+
+}
+
+
+
