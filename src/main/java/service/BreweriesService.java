@@ -1,6 +1,6 @@
-package apiServices;
+package service;
 
-import apiModels.SearchResponse;
+import models.SearchResponse;
 import io.restassured.RestAssured;
 import io.restassured.response.ValidatableResponse;
 

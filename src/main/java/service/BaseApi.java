@@ -1,4 +1,4 @@
-package apiServices;
+package service;
 
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;

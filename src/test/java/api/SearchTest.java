@@ -1,7 +1,7 @@
-import apiModels.SearchResponse;
-import apiServices.BreweriesService;
-import io.restassured.response.Response;
-import io.restassured.response.ValidatableResponse;
+package api;
+
+import models.SearchResponse;
+import service.BreweriesService;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -9,7 +9,7 @@ import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-public class ApiTests {
+public class SearchTest {
     BreweriesService breweriesService = new BreweriesService();
 
 
