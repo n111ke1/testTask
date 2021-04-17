@@ -15,12 +15,11 @@ public class SearchTest {
     public final static String ERROR_MESSAGE = "Couldn't find Brewery with 'id'=searching";
 
 
-    @Test(groups = "SearchProcess")
-    public void checkSearchWithValidName() {
-        String breweryName = "Barrel Dog Brewing";
+    @Test(dataProvider ="searchValidName", groups = "SearchProcess")
+    public void checkSearchWithValidName(String breweryName) {
         List<SearchResponse>response =  breweriesService.getBrewery(breweryName);
         assertThat(response).isNotEmpty();
-        response.forEach(r->assertThat(r.getName()).containsIgnoringCase(breweryName));
+        response.forEach(r->assertThat(r.getName()).containsIgnoringCase(breweryName.replaceAll("[\\W_0-9]", " ")));
     }
 
     @Test(groups = "SearchProcess")
@@ -59,13 +58,16 @@ public class SearchTest {
         return new Object[][]{
                 {""},
                 {null},
-                {"invalidData"},
+                {"$%%^%^^"},
                 {"%20"}};
     }
 
+    @DataProvider(name = "searchValidName")
+    public static Object[][] valueName() {
+        return new Object[][]{
+                {"Barrel Dog Brewing"},
+                {"Barrel_Dog_Brewing"},
+                {"Barrel%20Dog%20Brewing"}};
 
-
-
-
-
+    }
 }

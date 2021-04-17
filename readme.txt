@@ -10,7 +10,7 @@ GET https://api.openbrewerydb.org/breweries
 3. Filter breweries by city
 GET https://api.openbrewerydb.org/breweries?by_city=san_diego
     - check status code 200
-    - check every response "city" have value "san_diego"
+    - check every response "city" has value "san_diego"
         use different query values like: "seattle", "sea", "san_diego", "san%20diego"
 
 4. Filter breweries by state
