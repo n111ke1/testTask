@@ -23,7 +23,6 @@ tasks.withType(Test) {
 
 dependencies {
 
-
     compile group: 'org.testng', name: 'testng', version: '7.3.0'
     compile 'io.rest-assured:rest-assured:4.3.3'
     compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.12.2'
@@ -46,8 +45,11 @@ tasks.test {
         preserveOrder = true
     }
 
-    clean {
-        delete 'allure-results','build/allure-results'}
+    task SearchProcess(type: Test) {
+        useTestNG() {
+            includeGroups 'SearchProcess'
+        }
+    }
 
 
 }
